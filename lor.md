@@ -6,6 +6,14 @@
 *Arogorn  
  
 
-## Main locations
+## Main locations  
 *New Zealand
 *USA  
+
+## List of creatures
+*Humans
+*Hobbits
+*Elfs  
+
+
+
