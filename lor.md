@@ -6,3 +6,6 @@
 *Arogorn  
  
 
+## Main locations
+*New Zealand
+*USA  
