@@ -6,9 +6,16 @@
 *Arogorn  
  
 
-## Main locations
+## Main locations  
 *New Zealand
 *USA  
 
 
 Author: Tolkien
+## List of creatures
+*Humans
+*Hobbits
+*Elfs  
+
+
+
