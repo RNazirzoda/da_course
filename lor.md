@@ -9,3 +9,6 @@
 ## Main locations
 *New Zealand
 *USA  
+
+
+Author: Tolkien
