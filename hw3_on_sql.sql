@@ -18,11 +18,6 @@ select
 	, country || ' ' || state || ' ' || city || ' ' || address as address
 from public.customer;
 
-delete 
-from customers 
-where 
-	address like '%Brazil%';
-
 
 create table if not exists products(
 	products_id serial
