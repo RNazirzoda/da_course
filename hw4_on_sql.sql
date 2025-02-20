@@ -2,13 +2,14 @@ select *
 from employee;
 
 select 
-	employee.employee_id
-	, employee.first_name || ' ' || employee.last_name as full_name 
-	, employee.title 
-	, employee.reports_to 
-	, manager.first_name || ' ' || manager.last_name || ' , ' || manager.title as manager
-from employee 
-left join employee manager on employee.reports_to = manager.employee_id;
+	e.employee_id
+	, e.first_name || ' ' || e.last_name as full_name 
+	, e.title 
+	, e.reports_to 
+	, m.first_name || ' ' || m.last_name || ' , ' || m.title as manager
+from employee e
+	left join employee m 
+		on e.reports_to = m.employee_id;
 
 select * 
 from invoice;
@@ -17,7 +18,9 @@ with avg_invoice_2023 as (
 	select avg(total) as avg_total
 	from invoice 
 	where 
-		invoice_date between '2023-01-01' and '2023-12-31'
+		invoice_date 
+		between '2023-01-01' 
+			and '2023-12-31'
 )
 select 
 	invoice_id 
@@ -35,19 +38,22 @@ with avg_invoice_2023 as (
 	select avg(total) as avg_total
 	from invoice 
 	where 
-		invoice_date between '2023-01-01' and '2023-12-31'
+		invoice_date 
+		between '2023-01-01' 
+			and '2023-12-31'
 )
 select 
-	invoice.invoice_id 
-	, invoice.invoice_date 
+	i.invoice_id 
+	, i.invoice_date 
 	, extract(year from invoice_date) * 100 + extract(month from invoice_date) as monthkey
-	, invoice.customer_id 
-	, invoice.total 
+	, i.customer_id 
+	, i.total 
 	, customer.email
 from 
-	invoice
-join customer on invoice.customer_id = customer.customer_id
-where invoice.total > ( 
+	invoice i
+		join customer 
+			on i.customer_id = customer.customer_id
+where i.total > ( 
 	select 
 	avg_total 
 	from avg_invoice_2023);
@@ -56,23 +62,27 @@ with avg_invoice_2023 as (
 	select avg(total) as avg_total
 	from invoice 
 	where 
-		invoice_date between '2023-01-01' and '2023-12-31'
+		invoice_date 
+		between '2023-01-01' 
+			and '2023-12-31'
 )
 select 
-	invoice.invoice_id 
-	, invoice.invoice_date 
+	i.invoice_id 
+	, i.invoice_date 
 	, extract(year from invoice_date) * 100 + extract(month from invoice_date) as monthkey
-	, invoice.customer_id 
-	, invoice.total 
+	, i.customer_id 
+	, i.total 
 	, customer.email
 from 
-	invoice
-join customer on invoice.customer_id = customer.customer_id
-where invoice.total > ( 
+	invoice i
+		join customer 
+			on i.customer_id = customer.customer_id
+where i.total > ( 
 	select 
 	avg_total 
 	from avg_invoice_2023)
-	and customer.email not like '%gmail%';
+		and customer.email 
+			not like '%gmail%';
 
 select 
 	invoice_id 
@@ -81,7 +91,10 @@ select
 	, total 
 	, round(total / (select sum(total) from invoice), 4) as pct_sum
 from invoice
-where invoice_date between '2024-01-01' and '2024-12-31';
+where 
+	invoice_date 
+		between '2024-01-01' 
+			and '2024-12-31';
 
 
 select 
@@ -89,7 +102,10 @@ select
 	, sum(total) as customer_revenue
 	, round(sum(total) / (select sum(total) from invoice), 4) as pct_revenue
 from invoice
-where invoice_date between '2024-01-01' and '2024-12-31'
+where 
+	invoice_date 
+		between '2024-01-01' 
+			and '2024-12-31'
 group by customer_id;
 	
 	
