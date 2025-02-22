@@ -94,18 +94,4 @@ select
 from invoice
 group by extract(year from invoice_date), billing_country
 having sum(total) > 20
-order by sales_year asc, sales_sum desc;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+order by sales_year, sales_sum desc;
