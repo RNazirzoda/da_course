@@ -10,8 +10,7 @@ with month_sales as (
 		, date_part('month', i.invoice_date) as monthkey 
 		, sum(i.total) as total
 	from invoice i
-	left join customer c 
-		on i.customer_id = c.customer_id
+	left join customer c on i.customer_id = c.customer_id
 	group by 
 		c.customer_id 
 		, full_name 
@@ -55,8 +54,7 @@ select
 		, ms.monthkey
 		),0) as period_difference
 from moving_avg_sales mas
-	left join month_sales ms 
-		on mas.customer_id = ms.customer_id 
+	left join month_sales ms on mas.customer_id = ms.customer_id 
 		and mas.sale_year = ms.sale_year 
 		and mas.monthkey = ms.monthkey 
 order by 
@@ -76,14 +74,10 @@ with album_sales as (
 		, ar.name as artist_name 
 		, count(il.track_id) as tracks_sold
 	from invoice_line il 
-		left join invoice i 
-			on il.invoice_id = i.invoice_id 
-		left join track t 
-			on il.track_id = t.track_id
-		left join album al 
-			on t.album_id = al.artist_id
-		left join artist ar 
-			on al.artist_id = ar.artist_id
+		left join invoice i on il.invoice_id = i.invoice_id 
+		left join track t 	on il.track_id = t.track_id
+		left join album al 	on t.album_id = al.artist_id
+		left join artist ar on al.artist_id = ar.artist_id
 	group by 
 		sale_year 
 		, album_title 
@@ -125,8 +119,7 @@ with employee_clients as (
 		, e.first_name || ' ' || e.last_name as full_name 
 		, count(c.customer_id) as client_count 
 	from employee e
-	left join customer c
-		on e.employee_id = c.support_rep_id
+	left join customer c on e.employee_id = c.support_rep_id
 	group by 
 		e.employee_id 
 		, full_name
